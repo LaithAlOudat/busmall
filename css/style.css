@@ -1,10 +1,15 @@
 h1 {
-    margin: 150px 150px 150px 150px;
+    margin: 20px 150px 50px 50px;
     text-align: center;
     font-size: 24px;
 }
 
 .imgs {
-    margin: 50px 175px 50px 175px;
-text-align: center;
+    margin: 10px 75px 10px 75px;
+width: 250px;
+height: 250px;
+}
+
+#resultBtn {
+    margin: 50px 450px 50px 640px;
 }
