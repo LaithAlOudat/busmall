@@ -8,8 +8,8 @@ let a = 0;
 let leftIndex;
 let middleIndex;
 let rightIndex;
-let checkIndexs = [];
-
+let votes = [];
+let views = [];
 // define globe variables and get elements by ID:
 let imgsSection = document.getElementById('imgsSection');
 let leftImage = document.getElementById('leftImage');
@@ -39,7 +39,8 @@ for (let i = 0; i < productsImages.length; i++) {
   new Product(productsImages[i]);
 }
 
-// function for render the products' images:
+// 1) function for render the products' images:
+// 2) adding a views counter:
 function render() {
   leftIndex = getRandomNumber(0, Product.all.length - 1);
   // console.log(Product.all[leftIndex].image);
@@ -70,31 +71,7 @@ function render() {
   // checkIndexs.push[rightIndex, leftIndex, middleIndex]
 }
 
-
-
-
 render();
-
-
-// adding a counter for views:
-
-if (a < rounds) {
-  // console.log(a);
-  if (Product.all[leftIndex].image === leftImage) {
-    // console.log(Product.all[leftIndex].shownTime++);
-  }
-  if (Product.all[middleIndex].image === middleImage) {
-
-  }
-  if (Product.all[rightIndex].image === rightImage) {
-
-
-  }
-
-  render();
-
-}
-
 
 // 1) adding an event listener
 // 2) adding counter to count vote and number of rounds:
@@ -138,42 +115,48 @@ function mouseClicking(event) {
         let liEl1 = document.createElement('li');
         ulEl1.appendChild(liEl1);
         liEl1.textContent = `${Product.all[i].nameOfProduct} has ${Product.all[i].shownTime} views and has ${Product.all[i].voteTime} votes.`;
+        votes.push(Product.all[i].voteTime);
+        views.push(Product.all[i].shownTime);
       }
       imgsSection.removeEventListener('click', mouseClicking);
+
+      renderMyChart();
       // console.log('voteTime ', Product.voteTime);
       // console.log('shownTime ', Product.shownTime);
     }
   }
 }
 
-let ctx = document.getElementById('myChart').getContext('2d');
-let chart = new Chart(ctx, {
-  // The type of chart we want to create
-  type: 'line',
 
-  // The data for our dataset
-  data: {
-    labels: ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg',
-      'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg',
-      'scissors.jpg', 'shark.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'],
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: Product.all[i].voteTime,
+function renderMyChart() {
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
 
-    }],
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 255, 255)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: Product.all[i].shownTime,
-    }],
-  },
+    // The data for our dataset
+    data: {
+      labels: ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg',
+        'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg',
+        'scissors.jpg', 'shark.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'],
+      datasets: [{
+        label: 'votes',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: votes,
+      },
+      {
+        label: 'views',
+        backgroundColor: 'rgb(5, 133, 197)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: views,
+      }]
+    },
 
-  // Configuration options go here
-  options: {}
-});
+    // Configuration options go here
+    options: {}
+  });
+}
 
 // imgsSection.addEventListener('click', mouseclicking);
 
