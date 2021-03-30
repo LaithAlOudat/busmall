@@ -4,19 +4,16 @@ let productsImages = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'bre
   'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg',
   'scissors.jpg', 'shark.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 let rounds = 25;
-let numOfRounds = 0;
+let a = 0;
 let leftIndex;
 let middleIndex;
 let rightIndex;
 
-// get images section and it's element by ID:
+// define globe variables and get elements by ID:
 let imgsSection = document.getElementById('imgsSection');
 let leftImage = document.getElementById('leftImage');
 let middleImage = document.getElementById('middleImage');
 let rightImage = document.getElementById('rightImage');
-// button section and button element by ID:
-let btnSection = document.getElementById('btnSection');
-let resultBtn = document.getElementById('resultBtn');
 
 
 
@@ -80,36 +77,47 @@ render();
 imgsSection.addEventListener('click', mouseClicking);
 function mouseClicking(event) {
   if (event.target.id !== 'imgsSection') {
-    if (numOfRounds < rounds) {
-      numOfRounds++;
+    if (a < rounds) {
+      a++;
       if (event.target.id === leftImage.id) {
         Product.all[leftIndex].voteTime++;
+        Product.all[leftIndex].shownTime++;
+
       }
       if (event.target.id === middleImage.id) {
         Product.all[middleIndex].voteTime++;
+        Product.all[middleIndex].shownTime++;
+
       }
       if (event.target.id === rightImage.id) {
         Product.all[rightIndex].voteTime++;
+        Product.all[rightIndex].shownTime++;
+
 
       }
+      // console.log('voteTime ', Product.all[rightIndex]);
+      // console.log('voteTime ', Product.all[leftIndex]);
+      // console.log('voteTime ', Product.all[middleIndex]);
 
       render();
 
 
     }
-
-    let ulEl = document.getElementById('listsSection');
-    let liEl;
-    for (let i = 0; i < Product.all.length; i++) {
-      Product.voteTime.push(Product.all[i].voteTime);
-      Product.shownTime.push(Product.all[i].shownTime);
-      liEl = document.createElement('li');
-      liEl.textContent = `${Product.all[i].nameOfProduct} has ${Product.all[i].shownTime} views and has ${Product.all[i].voteTime} votes.`;
-      ulEl.appendChild(liEl);
+    if (a === rounds) {
+      let listsSection = document.getElementById('listsSection');
+      let ulEl1 = document.createElement('ul');
+      listsSection.appendChild(ulEl1);
+      for (let i = 0; i < Product.all.length; i++) {
+        // Product.voteTime.push(Product.all[i].voteTime);
+        // Product.shownTime.push(Product.all[i].shownTime);
+        let liEl1 = document.createElement('li');
+        ulEl1.appendChild(liEl1);
+        liEl1.textContent = `${Product.all[i].nameOfProduct} has ${Product.all[i].shownTime} views and has ${Product.all[i].voteTime} votes.`;
+      }
+      imgsSection.removeEventListener('click', mouseClicking);
+      // console.log('voteTime ', Product.voteTime);
+      // console.log('shownTime ', Product.shownTime);
     }
-    imgsSection.removeEventListener('click', mouseClicking);
-    // console.log('voteTime ', Product.voteTime);
-    // console.log('shownTime ', Product.shownTime);
   }
 }
 
@@ -145,12 +153,19 @@ function mouseClicking(event) {
 
 //   }
 // }
+
+// console.log(rounds);
+// console.log(a);
+// console.log(Product.all[rightIndex].voteTime);
+// console.log(Product.all[rightIndex].shownTime);
+// console.log(Product.all[leftIndex].voteTime);
+// console.log(Product.all[leftIndex].shownTime);
+// console.log(Product.all[middleIndex].voteTime);
+// console.log(Product.all[middleIndex].shownTime);
 // render();
 
 
-// console.log(rounds);
-// console.log(Product.voteTime);
-// console.log(Product.shownTime);
+
 
 
 

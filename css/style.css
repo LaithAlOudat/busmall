@@ -13,24 +13,19 @@ h1 {
     margin: 10px 100px 10px 90px;
 width: 250px;
 height: 250px;
-border: 2px solid rgb(241, 225, 0);
+/* border: 2px solid rgb(241, 225, 0); */
 }
 
-#btnSection {
-    margin: 10px 10px 10px 10px;
-    border: 1px solid blue;
-}
-
-#resultBtn {
-    margin: 50px 450px 50px 640px;
-}
 
 #imgsSection {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 
 #listsSection {
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    color: white;
+    text-align: center;
+    margin: 50px 10px 10px 10px;
 
 }
