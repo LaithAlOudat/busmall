@@ -8,6 +8,7 @@ let a = 0;
 let leftIndex;
 let middleIndex;
 let rightIndex;
+let checkIndexs = [];
 
 // define globe variables and get elements by ID:
 let imgsSection = document.getElementById('imgsSection');
@@ -45,34 +46,58 @@ function render() {
   leftImage.src = Product.all[leftIndex].image;
   leftImage.title = Product.all[leftIndex].nameOfProduct;
   leftImage.alt = Product.all[leftIndex].nameOfProduct;
+  Product.all[leftIndex].shownTime++;
   middleIndex = getRandomNumber(0, Product.all.length - 1);
   middleImage.src = Product.all[middleIndex].image;
   middleImage.title = Product.all[middleIndex].nameOfProduct;
   middleImage.alt = Product.all[middleIndex].nameOfProduct;
+  Product.all[middleIndex].shownTime++;
   rightIndex = getRandomNumber(0, Product.all.length - 1);
   rightImage.src = Product.all[rightIndex].image;
   rightImage.title = Product.all[rightIndex].nameOfProduct;
   rightImage.alt = Product.all[rightIndex].nameOfProduct;
+  Product.all[rightIndex].shownTime++;
 
-  if (leftIndex === middleIndex) {
+
+  while (leftIndex === middleIndex || leftIndex === rightIndex || middleIndex === rightIndex) {
     render();
-  } else {
-    if (leftIndex === rightIndex) {
-      render();
-    } else {
-      if (middleIndex === rightIndex) {
-        render();
-      }
-    }
+
 
   }
+
+  // else {
+  // render();
+  // checkIndexs.push[rightIndex, leftIndex, middleIndex]
 }
+
+
+
 
 render();
 
 
+// adding a counter for views:
+
+if (a < rounds) {
+  // console.log(a);
+  if (Product.all[leftIndex].image === leftImage) {
+    // console.log(Product.all[leftIndex].shownTime++);
+  }
+  if (Product.all[middleIndex].image === middleImage) {
+
+  }
+  if (Product.all[rightIndex].image === rightImage) {
+
+
+  }
+
+  render();
+
+}
+
+
 // 1) adding an event listener
-// 2) adding counter to count vote, shown time and number of rounds:
+// 2) adding counter to count vote and number of rounds:
 
 imgsSection.addEventListener('click', mouseClicking);
 function mouseClicking(event) {
@@ -81,17 +106,17 @@ function mouseClicking(event) {
       a++;
       if (event.target.id === leftImage.id) {
         Product.all[leftIndex].voteTime++;
-        Product.all[leftIndex].shownTime++;
+        // Product.all[leftIndex].shownTime++;
 
       }
       if (event.target.id === middleImage.id) {
         Product.all[middleIndex].voteTime++;
-        Product.all[middleIndex].shownTime++;
+        // Product.all[middleIndex].shownTime++;
 
       }
       if (event.target.id === rightImage.id) {
         Product.all[rightIndex].voteTime++;
-        Product.all[rightIndex].shownTime++;
+        // Product.all[rightIndex].shownTime++;
 
 
       }
@@ -128,13 +153,22 @@ let chart = new Chart(ctx, {
 
   // The data for our dataset
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg',
+      'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg',
+      'scissors.jpg', 'shark.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'],
     datasets: [{
       label: 'My First dataset',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45]
-    }]
+      data: Product.all[i].voteTime,
+
+    }],
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 255, 255)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: Product.all[i].shownTime,
+    }],
   },
 
   // Configuration options go here
