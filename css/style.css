@@ -27,5 +27,12 @@ height: 250px;
     color: white;
     text-align: center;
     margin: 50px 10px 10px 10px;
+    font-size: 20px;
 
+}
+
+#myChart {
+
+    height: 500px;
+    width: 500px;
 }
