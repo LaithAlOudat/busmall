@@ -201,7 +201,11 @@ function renderMyChart() {
 // console.log(Product.all[middleIndex].shownTime);
 // render();
 
-
+console.log(votes);
+localStorage.setItem('productStorageData', productsImages);
+let productsData = JSON.stringify('productStorageData');
+localStorage.setItem('voteStorageData', votes);
+let votesData = JSON.stringify('voteStorageData');
 
 
 
